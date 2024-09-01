@@ -3,11 +3,12 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { StatusBar } from 'expo-status-bar';
 import { LinearGradient } from 'expo-linear-gradient';
 import Animated, { FadeIn, FadeInDown, FadeOut } from 'react-native-reanimated';
+import { useRouter } from 'expo-router';
 
 export default function Index() {
+    const router = useRouter();
     return (
         <View className="flex-1 justify-center items-center">
-            <StatusBar style='light' />
             <Image className="h-full w-full absolute" source={require('../assets/images/welcome.png')} />
             <LinearGradient
                 colors={['transparent', '#18181b']}
@@ -27,6 +28,7 @@ export default function Index() {
 
                 <Animated.View entering={FadeInDown.delay(300).springify()}>
                     <Pressable
+                        onPress={() => router.push('home')}
                         style={{ height: hp(7), width: wp(80) }}
                         className="bg-rose-500 flex items-center justify-center mx-auto rounded-full border-[2px] border-neutral-200"
                     >
@@ -34,6 +36,7 @@ export default function Index() {
                     </Pressable>
                 </Animated.View>
             </LinearGradient>
+            <StatusBar style='light' />
         </View>
     )
 }
